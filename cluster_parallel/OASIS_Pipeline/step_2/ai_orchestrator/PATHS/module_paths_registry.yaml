@@ -1,0 +1,39 @@
+module_meta:
+  module_name: "ai_orchestrator"
+  module_version: "v1"
+  execution_layer: "v4"
+paths:
+  contracts_dir: "1_YAML_contracts"
+  panels_dir: "2_YAML_panels"
+  steps_py_dir: "3_Steps_py"
+steps:
+  "1.1":
+    name: "consume_events"
+    contract: "1_YAML_contracts/1.1_consume_events_contract.yaml"
+    panel: "2_YAML_panels/1.1_consume_events_panel.yaml"
+    script: "3_Steps_py/1.1_consume_events.py"
+  "1.2":
+    name: "load_context"
+    contract: "1_YAML_contracts/1.2_load_context_contract.yaml"
+    panel: "2_YAML_panels/1.2_load_context_panel.yaml"
+    script: "3_Steps_py/1.2_load_context.py"
+  "1.3":
+    name: "optional_readonly_rpc"
+    contract: "1_YAML_contracts/1.3_optional_readonly_rpc_contract.yaml"
+    panel: "2_YAML_panels/1.3_optional_readonly_rpc_panel.yaml"
+    script: "3_Steps_py/1.3_optional_readonly_rpc.py"
+  "1.4":
+    name: "call_ai"
+    contract: "1_YAML_contracts/1.4_call_ai_contract.yaml"
+    panel: "2_YAML_panels/1.4_call_ai_panel.yaml"
+    script: "3_Steps_py/1.4_call_ai.py"
+  "1.5":
+    name: "form_response"
+    contract: "1_YAML_contracts/1.5_form_response_contract.yaml"
+    panel: "2_YAML_panels/1.5_form_response_panel.yaml"
+    script: "3_Steps_py/1.5_form_response.py"
+  "1.6":
+    name: "emit_ui_signal"
+    contract: "1_YAML_contracts/1.6_emit_ui_signal_contract.yaml"
+    panel: "2_YAML_panels/1.6_emit_ui_signal_panel.yaml"
+    script: "3_Steps_py/1.6_emit_ui_signal.py"

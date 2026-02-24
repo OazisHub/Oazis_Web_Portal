@@ -1,0 +1,13 @@
+schema: shared_contract.v1
+contract_meta:
+  contract_version: "1.0.0"
+  contract_id: "advisory_message"
+  _about_ru: "Нефинансовый advisory-ответ AI слоя для UI/voice."
+fields:
+  required:
+    - message_text
+    - reasoning_summary
+    - related_entities
+    - ui_reaction
+    - voice_style
+    - confidence_score

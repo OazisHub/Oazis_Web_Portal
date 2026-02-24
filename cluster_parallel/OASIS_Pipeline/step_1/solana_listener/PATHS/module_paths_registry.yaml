@@ -1,0 +1,34 @@
+module_meta:
+  module_name: "solana_listener"
+  module_version: "v1"
+  execution_layer: "v4"
+paths:
+  contracts_dir: "1_YAML_contracts"
+  panels_dir: "2_YAML_panels"
+  steps_ts_dir: "3_Steps_ts"
+steps:
+  "1.1":
+    name: "connect_rpc_ws"
+    contract: "1_YAML_contracts/1.1_connect_rpc_ws_contract.yaml"
+    panel: "2_YAML_panels/1.1_connect_rpc_ws_panel.yaml"
+    script: "3_Steps_ts/1.1_connect_rpc_ws.ts"
+  "1.2":
+    name: "subscribe_program_logs"
+    contract: "1_YAML_contracts/1.2_subscribe_program_logs_contract.yaml"
+    panel: "2_YAML_panels/1.2_subscribe_program_logs_panel.yaml"
+    script: "3_Steps_ts/1.2_subscribe_program_logs.ts"
+  "1.3":
+    name: "normalize_events"
+    contract: "1_YAML_contracts/1.3_normalize_events_contract.yaml"
+    panel: "2_YAML_panels/1.3_normalize_events_panel.yaml"
+    script: "3_Steps_ts/1.3_normalize_events.ts"
+  "1.4":
+    name: "publish_to_queue"
+    contract: "1_YAML_contracts/1.4_publish_to_queue_contract.yaml"
+    panel: "2_YAML_panels/1.4_publish_to_queue_panel.yaml"
+    script: "3_Steps_ts/1.4_publish_to_queue.ts"
+  "1.5":
+    name: "healthcheck_metrics"
+    contract: "1_YAML_contracts/1.5_healthcheck_metrics_contract.yaml"
+    panel: "2_YAML_panels/1.5_healthcheck_metrics_panel.yaml"
+    script: "3_Steps_ts/1.5_healthcheck_metrics.ts"

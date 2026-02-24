@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OASIS Portal MVP</title>
+    <style>
+      :root {
+        --bg-a: #081827;
+        --bg-b: #0f2a3d;
+        --glass: rgba(18, 41, 58, 0.62);
+        --text: #e6f3ff;
+        --accent: #4cd6ff;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: var(--text);
+        background: radial-gradient(circle at 20% 10%, #204b67 0%, transparent 40%),
+                    radial-gradient(circle at 80% 0%, #133650 0%, transparent 35%),
+                    linear-gradient(160deg, var(--bg-a), var(--bg-b));
+        min-height: 100vh;
+      }
+      .shell {
+        max-width: 960px;
+        margin: 40px auto;
+        padding: 24px;
+      }
+      .card {
+        background: var(--glass);
+        border: 1px solid rgba(76, 214, 255, 0.25);
+        border-radius: 18px;
+        padding: 18px;
+        backdrop-filter: blur(8px);
+      }
+      .title { margin: 0 0 8px 0; font-size: 28px; }
+      .subtitle { margin: 0 0 20px 0; opacity: 0.8; }
+      .grid { display: grid; gap: 16px; grid-template-columns: 1fr 1fr; }
+      .avatar {
+        height: 260px;
+        border-radius: 16px;
+        display: grid;
+        place-items: center;
+        background: radial-gradient(circle, rgba(76,214,255,0.35), rgba(76,214,255,0.06));
+        border: 1px solid rgba(76,214,255,0.35);
+        transition: transform 0.35s ease, box-shadow 0.35s ease;
+      }
+      .pulse { animation: pulse 1.4s infinite; }
+      @keyframes pulse {
+        0% { transform: scale(1); box-shadow: 0 0 0 rgba(76,214,255,0.0); }
+        50% { transform: scale(1.03); box-shadow: 0 0 40px rgba(76,214,255,0.35); }
+        100% { transform: scale(1); box-shadow: 0 0 0 rgba(76,214,255,0.0); }
+      }
+      .kv { margin: 4px 0; font-size: 14px; opacity: 0.92; }
+      .msg { white-space: pre-wrap; line-height: 1.45; }
+      @media (max-width: 800px) {
+        .grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <div class="card">
+        <h1 class="title">OASIS Portal MVP</h1>
+        <p class="subtitle">3D/voice bridge reading orchestrator UI signals.</p>
+        <div class="grid">
+          <div class="card avatar" id="avatar">AVATAR</div>
+          <div class="card">
+            <div class="kv" id="reaction">reaction: -</div>
+            <div class="kv" id="voiceStyle">voice_style: -</div>
+            <div class="kv" id="intensity">intensity: -</div>
+            <div class="kv" id="updated">updated: -</div>
+            <hr style="border-color: rgba(76,214,255,0.2);" />
+            <div class="msg" id="message">Waiting for advisory message...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/app.js"></script>
+  </body>
+</html>

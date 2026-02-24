@@ -1,0 +1,8 @@
+module_id: "portal_frontend_3d"
+summary: "Portal UI module: voice capture, send turn, render advisory, react avatar."
+step_id_policy:
+  local_to_module: true
+  starts_from: "1.1"
+rendering_stack:
+  framework: "React"
+  engine: "Three.js + React Three Fiber"

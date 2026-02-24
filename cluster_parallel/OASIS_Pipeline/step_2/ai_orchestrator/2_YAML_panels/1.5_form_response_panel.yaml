@@ -1,0 +1,78 @@
+schema: step_panel.v4
+panel_meta:
+  panel_version: "v4"
+  logic_version: "0.0.1"
+  step_id: "1.5"
+  step_name: "1.5_form_response"
+  step_family: "v4"
+  module_id: "ai_orchestrator"
+  notes_ru: "Compose final advisory_message contract payload."
+anchors:
+  media_bank: "3_Media_Bank"
+  runtime: "3_Media_Bank/0_local_runtime"
+  pointers: "3_Media_Bank/0_local_runtime/active_job"
+  temp: "3_Media_Bank/0_local_runtime/tmp"
+paths:
+  input:
+    mode: "stream"
+    _mode_enum: ["single", "batch", "stream"]
+    input_dir: null
+    input_file: null
+  job_root:
+    path: "3_Runtime/ai_orchestrator/jobs/{job_id}"
+  step_run_root:
+    path: "3_Runtime/ai_orchestrator/steps/1_5"
+  active_job_path:
+    path: "3_Media_Bank/0_local_runtime/active_job/active_job.json"
+runtime:
+  ensure_dirs: true
+  log_level: "info"
+  fail_on_missing_input: false
+  exists_policy: "overwrite"
+  _exists_policy_enum: ["skip", "overwrite", "error"]
+response:
+  input_ai_overlay_file: "3_Runtime/ai_orchestrator/steps/1_4/data/ai_overlay.json"
+  input_context_file: "3_Runtime/ai_orchestrator/steps/1_2/data/context_payload.json"
+  input_rpc_snapshot_file: "3_Runtime/ai_orchestrator/steps/1_3/data/rpc_snapshot.json"
+  fallback:
+    message_text: "No fresh signal available; providing safe fallback advisory."
+    reasoning_summary: "Fallback path used because AI overlay was missing or invalid."
+    ui_reaction: "pulse_neutral"
+    voice_style: "neutral"
+    confidence_score: 0.55
+ai:
+  enabled: false
+  provider: "openai"
+  model: "gpt-4.1-mini"
+  policy:
+    mode: "judge"
+    _mode_enum: ["generate", "judge", "hybrid"]
+  budget:
+    max_calls: 1
+    max_tokens: 1200
+    timeout_sec: 60
+    retries: 1
+output_artifacts:
+  advisory_message:
+    enabled: true
+    root_key: "step_run_root"
+    relative_path: "data/advisory_message.json"
+  advisory_result:
+    enabled: true
+    root_key: "step_run_root"
+    relative_path: "meta/result.json"
+meta_output:
+  enabled: true
+  root_key: "step_run_root"
+  relative_path: "run_meta.json"
+  include:
+    contract_version: true
+    logic_version: true
+    panel_version: true
+    step_id: true
+    step_name: true
+    panel_path: true
+    input_paths: true
+    output_paths: true
+    runtime: true
+    warnings: true

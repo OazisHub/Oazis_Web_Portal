@@ -1,0 +1,15 @@
+schema: shared_contract.v1
+contract_meta:
+  contract_version: "1.0.0"
+  contract_id: "chain_event"
+  _about_ru: "Нормализованное событие chain-level для межмодульного обмена."
+fields:
+  required:
+    - event_id
+    - chain
+    - program_id
+    - slot
+    - signature
+    - event_type
+    - subjects
+    - payload

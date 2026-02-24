@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OASIS Portal Office 3D</title>
+    <style>
+      :root {
+        --bg: #07131e;
+        --panel: rgba(13, 32, 47, 0.84);
+        --panel-border: rgba(90, 197, 255, 0.18);
+        --text: #e9f6ff;
+        --muted: #9fb8cc;
+        --accent: #49d2ff;
+        --accent-2: #75ffc4;
+        --danger: #ff8f8f;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Avenir Next", "Segoe UI", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at 20% 10%, #113552 0%, transparent 35%),
+          radial-gradient(circle at 90% 0%, #0f3248 0%, transparent 32%),
+          linear-gradient(160deg, #081521, #061019 65%);
+      }
+      .layout {
+        max-width: 1360px;
+        margin: 24px auto;
+        padding: 0 16px;
+        display: grid;
+        grid-template-columns: 250px minmax(0, 1fr) 300px;
+        gap: 14px;
+      }
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--panel-border);
+        border-radius: 18px;
+        backdrop-filter: blur(8px);
+      }
+      .sidebar { padding: 16px; }
+      .brand { margin: 0 0 14px; font-size: 21px; font-weight: 700; }
+      .brand span { color: var(--accent); }
+      .menu { display: grid; gap: 10px; }
+      .menu button {
+        text-align: left;
+        border: 1px solid rgba(117, 255, 196, 0.18);
+        background: rgba(12, 29, 41, 0.7);
+        color: var(--text);
+        padding: 10px 12px;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      .workspace { display: grid; gap: 14px; }
+      .topbar {
+        padding: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .topbar h1 { margin: 0; font-size: 25px; }
+      .topbar p { margin: 6px 0 0; color: var(--muted); }
+      .actions { display: flex; gap: 10px; }
+      .btn {
+        border: 0;
+        background: linear-gradient(135deg, #2dc2f2, #1f8de7);
+        color: white;
+        padding: 10px 14px;
+        border-radius: 10px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .btn.secondary {
+        background: rgba(95, 205, 255, 0.14);
+        border: 1px solid rgba(95, 205, 255, 0.32);
+      }
+      .main-grid {
+        display: grid;
+        grid-template-columns: 1.3fr 1fr;
+        gap: 14px;
+      }
+      .scene-card { padding: 14px; }
+      .scene-wrap {
+        height: 360px;
+        border-radius: 14px;
+        border: 1px solid rgba(73,210,255,0.34);
+        background: radial-gradient(circle at 40% 30%, rgba(73,210,255,0.14), rgba(3,9,14,0.9));
+        overflow: hidden;
+      }
+      #scene3d {
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+      #scene3d canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      .scene-hint {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .stats {
+        margin-top: 12px;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .stat {
+        background: rgba(9, 22, 33, 0.75);
+        border: 1px solid rgba(117,255,196,0.2);
+        border-radius: 10px;
+        padding: 10px;
+      }
+      .stat .k { color: var(--muted); font-size: 12px; }
+      .stat .v { font-size: 14px; margin-top: 6px; }
+      .assistant-card { padding: 16px; }
+      .assistant-card h3 { margin: 0 0 10px; }
+      .message-box {
+        min-height: 170px;
+        background: rgba(9, 22, 33, 0.78);
+        border: 1px solid rgba(73,210,255,0.18);
+        border-radius: 12px;
+        padding: 12px;
+        color: #ddf1ff;
+        line-height: 1.45;
+        white-space: pre-wrap;
+      }
+      .ask-row {
+        margin-top: 12px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 10px;
+      }
+      .ask-row input {
+        background: rgba(6, 16, 24, 0.9);
+        border: 1px solid rgba(117,255,196,0.25);
+        border-radius: 10px;
+        color: var(--text);
+        padding: 10px 12px;
+        outline: none;
+      }
+      .events-card { padding: 16px; }
+      .events-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+      .events-head h3 { margin: 0; }
+      .filters {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .filter-btn {
+        border: 1px solid rgba(73,210,255,0.28);
+        background: rgba(9, 22, 33, 0.82);
+        color: var(--text);
+        border-radius: 999px;
+        padding: 6px 10px;
+        font-size: 12px;
+        cursor: pointer;
+      }
+      .filter-btn.active {
+        border-color: rgba(117,255,196,0.7);
+        color: #d5ffef;
+      }
+      .events-list {
+        display: grid;
+        gap: 8px;
+        max-height: 280px;
+        overflow: auto;
+      }
+      .event-item {
+        background: rgba(9, 22, 33, 0.78);
+        border: 1px solid rgba(73,210,255,0.2);
+        border-radius: 10px;
+        padding: 9px 10px;
+      }
+      .event-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        font-size: 12px;
+      }
+      .event-type { font-weight: 600; color: #dcf3ff; }
+      .event-meta { color: var(--muted); font-size: 12px; margin-top: 4px; }
+      .tag {
+        border-radius: 999px;
+        padding: 2px 8px;
+        font-size: 11px;
+        border: 1px solid rgba(117,255,196,0.35);
+      }
+      .tag.high {
+        color: #ffd2d2;
+        border-color: rgba(255,143,143,0.5);
+      }
+      .tag.info {
+        color: #cdf6ff;
+      }
+      .rail {
+        padding: 16px;
+        display: grid;
+        gap: 12px;
+        align-content: start;
+      }
+      .tile {
+        background: rgba(9, 22, 33, 0.78);
+        border: 1px solid rgba(73,210,255,0.22);
+        border-radius: 12px;
+        padding: 12px;
+      }
+      .tile h4 { margin: 0 0 8px; font-size: 14px; color: var(--muted); }
+      .mono {
+        font-family: "SFMono-Regular", Menlo, monospace;
+        font-size: 12px;
+        word-break: break-word;
+      }
+      .ok { color: var(--accent-2); }
+      .err { color: var(--danger); }
+      @media (max-width: 1140px) {
+        .layout { grid-template-columns: 1fr; }
+        .main-grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="panel sidebar">
+        <h2 class="brand">OASIS <span>PORTAL</span></h2>
+        <div class="menu">
+          <button>Dashboard</button>
+          <button>Advisory Feed</button>
+          <button>Voice Console</button>
+          <button>Wallet Access</button>
+          <button>Settings</button>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <section class="panel topbar">
+          <div>
+            <h1>Personal Office 3D</h1>
+            <p>Realtime avatar scene driven by OASIS signal stream.</p>
+          </div>
+          <div class="actions">
+            <button class="btn secondary" id="refresh">Refresh</button>
+            <button class="btn" id="askQuick">Ask AI</button>
+          </div>
+        </section>
+
+        <section class="main-grid">
+          <article class="panel scene-card">
+            <div class="scene-wrap"><div id="scene3d"></div></div>
+            <div class="scene-hint">MVP 3D core now. Next step: replace with Blender GLB avatar.</div>
+            <div class="stats">
+              <div class="stat"><div class="k">Reaction</div><div class="v" id="reaction">-</div></div>
+              <div class="stat"><div class="k">Voice Style</div><div class="v" id="voiceStyle">-</div></div>
+              <div class="stat"><div class="k">Intensity</div><div class="v" id="intensity">-</div></div>
+            </div>
+          </article>
+
+          <article class="panel assistant-card">
+            <h3>Advisor Output</h3>
+            <div class="message-box" id="message">Loading...</div>
+            <div class="ask-row">
+              <input id="askInput" placeholder="Ask: show activity, summarize state, report confidence..." />
+              <button class="btn" id="askSend">Send</button>
+            </div>
+          </article>
+        </section>
+
+        <section class="panel events-card">
+          <div class="events-head">
+            <h3>Event Feed</h3>
+            <div class="filters">
+              <button class="filter-btn active" data-filter="all">all</button>
+              <button class="filter-btn" data-filter="account">account</button>
+              <button class="filter-btn" data-filter="transfer">transfer</button>
+              <button class="filter-btn" data-filter="vote">vote</button>
+            </div>
+          </div>
+          <div class="events-list" id="eventsList"></div>
+        </section>
+      </main>
+
+      <aside class="panel rail">
+        <div class="tile">
+          <h4>System Status</h4>
+          <div id="status" class="ok">online</div>
+          <div class="mono" id="updated">updated: -</div>
+        </div>
+        <div class="tile">
+          <h4>Confidence</h4>
+          <div id="confidence">-</div>
+        </div>
+        <div class="tile">
+          <h4>Related Entities</h4>
+          <div class="mono" id="entities">-</div>
+        </div>
+      </aside>
+    </div>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

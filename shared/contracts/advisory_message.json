@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "advisory_message",
+  "type": "object",
+  "required": ["message_text", "ui_reaction", "voice_style", "confidence_score"],
+  "properties": {
+    "message_text": { "type": "string" },
+    "reasoning_summary": { "type": "string" },
+    "related_entities": { "type": "object" },
+    "ui_reaction": { "type": "string" },
+    "voice_style": { "type": "string" },
+    "confidence_score": { "type": "number", "minimum": 0, "maximum": 1 }
+  },
+  "additionalProperties": true
+}

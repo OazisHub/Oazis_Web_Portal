@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "voice_turn",
+  "type": "object",
+  "required": ["session_id", "utterance_text", "context_scope"],
+  "properties": {
+    "session_id": { "type": "string" },
+    "wallet_pubkey": { "type": ["string", "null"] },
+    "utterance_text": { "type": "string" },
+    "detected_intent": { "type": ["string", "null"] },
+    "context_scope": { "type": "string", "enum": ["portal", "session", "dao"] }
+  },
+  "additionalProperties": true
+}

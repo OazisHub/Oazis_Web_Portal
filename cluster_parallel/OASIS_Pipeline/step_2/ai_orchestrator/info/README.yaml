@@ -1,0 +1,5 @@
+module_id: "ai_orchestrator"
+summary: "Context + AI advisory module with optional read-only RPC calls."
+step_id_policy:
+  local_to_module: true
+  starts_from: "1.1"

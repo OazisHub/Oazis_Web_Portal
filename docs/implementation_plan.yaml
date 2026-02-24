@@ -1,0 +1,39 @@
+project: OASIS_classic
+version: 1
+last_updated: 2026-02-24
+
+phases:
+  - id: P1_foundation
+    status: done
+    goals:
+      - Define service boundaries
+      - Define contracts
+      - Build MVP listener/orchestrator/portal flow
+
+  - id: P2_mvp_hardening
+    status: in_progress
+    goals:
+      - Improve error handling and retries
+      - Add contract validation
+      - Add structured metrics and logs
+
+  - id: P3_voice_and_3d
+    status: in_progress
+    goals:
+      - Integrate production STT/TTS
+      - Improve avatar reaction mapping
+      - Add real-time UI updates
+
+  - id: P4_scale
+    status: planned
+    goals:
+      - Horizontal orchestrator workers
+      - Queue tuning and dead-letter strategy
+      - Dedicated indexing and cache policies
+
+  - id: P5_governance_and_access
+    status: planned
+    goals:
+      - Token-gated portal access (community utility)
+      - DAO-aware context routing
+      - Policy and moderation controls

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "chain_event",
+  "type": "object",
+  "required": ["event_id", "chain", "program_id", "slot", "event_type", "subjects", "payload"],
+  "properties": {
+    "event_id": { "type": "string" },
+    "chain": { "const": "solana" },
+    "program_id": { "type": "string" },
+    "slot": { "type": "integer", "minimum": 0 },
+    "signature": { "type": "string" },
+    "event_type": { "type": "string" },
+    "subjects": { "type": "array", "items": { "type": "string" } },
+    "payload": { "type": "object" }
+  },
+  "additionalProperties": true
+}
