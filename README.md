@@ -19,7 +19,7 @@
 - `cluster_parallel/OASIS_Pipeline` — cluster-style mirror kept in parallel
 
 ## Quick Start
-1. `cd /Users/mg/Documents/S.Polonium/OAZIS/Classic_Version`
+1. `cd /Users/mg/Documents/S.Polonium/OAZIS/Oazis_Web_Portal`
 2. `make setup`
 3. Adjust `.env` if needed
 4. `make up`
@@ -30,6 +30,7 @@ Portal URL after startup:
 
 Classic tree overview:
 - `docs/folder_structure_classic.md`
+- `TEAM_ONBOARDING.md` (team access + environment setup)
 
 ## CI
 - Workflow: `.github/workflows/classic-version-ci.yml`
