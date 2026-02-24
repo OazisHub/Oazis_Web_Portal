@@ -1,0 +1,8 @@
+# Default owners for all files
+* @OazisHub
+
+# Optional granularity
+/backend/ @OazisHub
+/frontend/ @OazisHub
+/shared/ @OazisHub
+/docs/ @OazisHub
