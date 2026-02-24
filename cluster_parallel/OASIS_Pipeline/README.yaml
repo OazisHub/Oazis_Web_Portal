@@ -1,8 +1,0 @@
-pipeline_id: "OASIS_Pipeline"
-status: "scaffold"
-modules:
-  - "step_1/solana_listener"
-  - "step_2/ai_orchestrator"
-notes:
-  - "Module-local STEP_ID policy: each module starts at 1.1"
-  - "Portal module scaffold planned for next increment"

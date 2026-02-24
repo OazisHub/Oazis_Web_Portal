@@ -23,7 +23,7 @@ git config --global user.email "YOUR_GITHUB_EMAIL"
 Set repository remote (SSH preferred):
 
 ```bash
-cd /Users/mg/Documents/S.Polonium/OAZIS/Oazis_Web_Portal
+cd <repo_root>
 git remote set-url origin git@github.com:OazisHub/Oazis_Web_Portal.git
 git remote -v
 ```
@@ -51,7 +51,7 @@ Keep only:
 ## 4. Local Bootstrap
 
 ```bash
-cd /Users/mg/Documents/S.Polonium/OAZIS/Oazis_Web_Portal
+cd <repo_root>
 make setup
 make up
 make smoke
@@ -74,7 +74,7 @@ Current CI validates:
 - Smoke flow
 
 CI file:
-- `/Users/mg/Documents/S.Polonium/OAZIS/.github/workflows/classic-version-ci.yml`
+- `.github/workflows/ci.yml`
 
 ## 7. Codex Environment Rules
 - Use shared environment credentials, not personal one-off tokens

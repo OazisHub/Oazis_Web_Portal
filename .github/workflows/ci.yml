@@ -34,9 +34,7 @@ jobs:
           node --check frontend/portal/server.js
 
       - name: Smoke script syntax
-        run: |
-          bash -n scripts/smoke.sh
-          bash -n scripts/run_cluster_parallel.sh
+        run: bash -n scripts/smoke.sh
 
   compose-smoke:
     runs-on: ubuntu-latest

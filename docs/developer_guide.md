@@ -1,7 +1,7 @@
 # Developer Guide (Classic)
 
 ## 1. Quick start
-1. `cd /Users/mg/Documents/S.Polonium/OAZIS/Classic_Version`
+1. `cd <repo_root>`
 2. `make setup`
 3. Fill `.env` (at minimum `OPENAI_API_KEY` if non-mock)
 4. `make up`

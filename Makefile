@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-.PHONY: help setup up down logs ps smoke cluster-smoke lint
+.PHONY: help setup up down logs ps smoke lint
 
 help:
 	@echo "Targets:"
@@ -10,7 +10,6 @@ help:
 	@echo "  logs   - tail compose logs"
 	@echo "  ps     - list containers"
 	@echo "  smoke  - run local API smoke checks"
-	@echo "  cluster-smoke - run mirrored cluster pipeline from Classic_Version"
 
 setup:
 	@test -f .env || cp .env.example .env
@@ -30,6 +29,3 @@ ps:
 
 smoke:
 	./scripts/smoke.sh
-
-cluster-smoke:
-	./scripts/run_cluster_parallel.sh
